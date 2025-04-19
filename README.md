@@ -1,24 +1,87 @@
-# form-generator
+# Генератор форм
 
-## Project setup
+![img](/img/vuex.png)
+
+## Общая структура компонента
 ```
-npm install
+<FormGenerator>
+  ├── Props (входные данные):
+  │    ├── schema: Object (описание полей формы)
+  │    └── modelValue: Object (текущие значения формы)
+  │
+  ├── Данные:
+  │    └── formData: Object (вычисляемое свойство, синхронизируется с Vuex)
+  │
+  ├── Events (события):
+  │    ├── update:modelValue (обновление данных)
+  │    └── submit (отправка формы)
+  │
+  ├── Methods:
+  │    └── handleSubmit() → saveForm + emit('submit')
+  │
+  └── Template:
+       ├── Форма (<form @submit.prevent>)
+       │    ├── Динамические поля (v-for по schema)
+       │    │    ├── input (текстовое поле)
+       │    │    ├── textarea
+       │    │    ├── select (выпадающий список)
+       │    │    └── checkbox
+       │    └── Кнопка отправки
+       └── Привязка данных (v-model к formData)
 ```
 
-### Compiles and hot-reloads for development
+## Поток данных
+
 ```
-npm run serve
+(1) Родительский компонент:
+    │
+    ├── Передает schema (структура формы).
+    ├── Передает modelValue (начальные значения).
+    │
+(2) FormGenerator:
+    │
+    ├── Динамически рендерит поля на основе schema.
+    ├── При изменении поля:
+    │    ├── Обновляет formData (через v-model).
+    │    └── Сохраняет в Vuex (saveForm).
+    │
+    └── При отправке формы:
+         ├── Вызывает handleSubmit().
+         ├── Сохраняет данные в Vuex.
+         └── Отправляет событие submit родителю.
 ```
 
-### Compiles and minifies for production
+## Взаимодействие с Vuex
+
 ```
-npm run build
+FormGenerator:
+  ├── Получает данные: formData ← getFormData (из Vuex через mapGetters).
+  ├── Сохраняет данные: saveForm → Vuex (через mapActions).
+  └── Данные всегда синхронизированы с хранилищем.
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Пример объекта schema
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```
+schema: {
+  email: {
+    type: 'input',
+    label: 'Email',
+    attrs: { placeholder: 'user@example.com', type: 'email' }
+  },
+  message: {
+    type: 'textarea',
+    label: 'Сообщение',
+    attrs: { rows: 5 }
+  },
+  country: {
+    type: 'select',
+    label: 'Страна',
+    attrs: { options: ['Россия', 'Беларусь', 'Казахстан'] }
+  },
+  agree: {
+    type: 'checkbox',
+    label: 'Согласие на обработку данных'
+  }
+}
+```
