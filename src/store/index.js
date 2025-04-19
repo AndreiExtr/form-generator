@@ -2,13 +2,19 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-  },
-  getters: {
+    formData: {}
   },
   mutations: {
+    setFormData (state, payload) {
+      state.formData = payload
+    }
   },
   actions: {
+    saveForm ({ commit }, data) {
+      commit('setFormData', data)
+    }
   },
-  modules: {
+  getters: {
+    getFormData: (state) => state.formData
   }
 })

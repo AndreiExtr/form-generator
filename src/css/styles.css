@@ -1,0 +1,12 @@
+@import 'reset.css';
+@import 'font.css';
+
+@import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
+
+html, body {
+  height: 100vh;
+  font-family: 'Play', Arial, sans-serif;
+  background-color: #ececec;
+  overflow: auto;
+}

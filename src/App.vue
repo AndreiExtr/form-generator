@@ -1,30 +1,19 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/">Генератор формы</router-link> |
+    <router-link to="/edit-user">Пример №1 Редактировать пользователя</router-link> |
+    <router-link to="/profile-settings">Пример №2 Настройки профиля</router-link>
   </nav>
-  <router-view/>
+  <router-view />
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
+<style scoped>
 nav {
-  padding: 30px;
-
+  padding: 1rem;
+  background: #eee;
+  text-align: center;
   a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+    margin: 0 10px;
   }
 }
 </style>
