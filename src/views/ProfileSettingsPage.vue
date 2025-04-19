@@ -6,8 +6,7 @@
       v-if="schema && model"
       :schema="schema"
       v-model="model"
-      @save="handleSave"
-      @cancel="handleCancel"
+      @submit="handleSave"
     />
     <div v-else>Загрузка формы...</div>
   </div>
@@ -69,9 +68,6 @@ export default {
     handleSave (data) {
       console.log('Сохраняем на сервер:', data)
       alert('Профиль обновлён!')
-    },
-    handleCancel () {
-      alert('Изменения отменены.')
     }
   }
 }

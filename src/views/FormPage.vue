@@ -4,8 +4,7 @@
     <FormGenerator
       :schema="formSchema"
       v-model="formData"
-      @save="handleSave"
-      @cancel="handleCancel"
+      @submit="handleSave"
     />
   </div>
 </template>
@@ -56,9 +55,6 @@ export default {
     handleSave (data) {
       this.saveForm(data)
       alert('Форма сохранена!')
-    },
-    handleCancel () {
-      alert('Форма сброшена!')
     }
   }
 }

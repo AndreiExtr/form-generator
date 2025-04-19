@@ -3,8 +3,7 @@
     <h1>Редактирование пользователя</h1>
     <FormGenerator
       :schema="editUserSchema"
-      @save="handleEditSave"
-      @cancel="handleEditCancel"
+      @submit="handleEditSave"
     />
   </div>
 </template>
@@ -39,9 +38,6 @@ export default {
     handleEditSave (data) {
       this.saveForm(data)
       alert('Пользователь сохранён!')
-    },
-    handleEditCancel () {
-      alert('Редактирование отменено!')
     }
   }
 }
